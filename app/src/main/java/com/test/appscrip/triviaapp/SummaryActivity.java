@@ -8,7 +8,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class SummaryActivity extends Activity {
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+
+import java.util.List;
+
+public class SummaryActivity extends AppCompatActivity {
 
     public static final String NAME = "name";
     public static final String DATETIME = "datetime";
@@ -19,6 +26,8 @@ public class SummaryActivity extends Activity {
     String finalSummary;
     String databaseString;
     Test test;
+    String name1, date1, question;
+    TestViewModel testViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,22 +37,32 @@ public class SummaryActivity extends Activity {
         finish = (Button) findViewById(R.id.finish);
         history = (Button) findViewById(R.id.history);
 
-
+        //catch intent
         if (getIntent().hasExtra(DATETIME)) {
             String date = getIntent().getStringExtra(DATETIME);
-            databaseString = "Game : " + test.getId() + date;
+            date1 = "Game : " + date;
         }
         if (getIntent().hasExtra(NAME)) {
             String name = getIntent().getStringExtra(NAME);
-            finalSummary = "Hello " + name + ": \n\n" + "Here are the selected answers: " ;
+            finalSummary = "Hello " + name + ": \n" + "Here are the selected answers: " ;
+            name1 = "Name : " +name;
         }
 
         if (getIntent().hasExtra(QUESTION1)) {
-            String question = getIntent().getStringExtra(QUESTION1);
+            question = getIntent().getStringExtra(QUESTION1);
             finalSummary = finalSummary + question;
         }
 
+        //save data
+        test = new Test(name1, date1, question);
+        testViewModel = new ViewModelProvider(this).get(TestViewModel.class);
+        testViewModel.getAllData().observe(this, new Observer<List<Test>>() {
+            @Override
+            public void onChanged(@Nullable List<Test> tests) {
+            }
+        });
 
+        testViewModel.insert(test);
 
         summary.setText(finalSummary);
 

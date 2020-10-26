@@ -43,9 +43,6 @@ public abstract class TestDatabse extends RoomDatabase {
         }
         @Override
         protected Void doInBackground(Void... voids) {
-            testDao.insert(new Test("Ajay" ,"test1", "For testing"));
-            testDao.insert(new Test("Vijay", "test2", "For testing 2"));
-            testDao.insert(new Test("Ajay" ,"test1", "For testing, ans1"));
             return null;
         }
     }

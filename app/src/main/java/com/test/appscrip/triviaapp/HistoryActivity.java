@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 public class HistoryActivity extends AppCompatActivity {
+    private static final String TAG = "HistoryActivityTest";
     private TestViewModel testViewModel;
 
     @Override
@@ -33,10 +34,12 @@ public class HistoryActivity extends AppCompatActivity {
         listrecyclerview.setAdapter(adapter);
 
         testViewModel = new ViewModelProvider(this).get(TestViewModel.class);
+
+        //observe any update in data
         testViewModel.getAllData().observe(this, new Observer<List<Test>>() {
             @Override
             public void onChanged(@Nullable List<Test> tests) {
-                Log.d("TestAdapterItems", "Data is updating");
+                Log.d(TAG, "Data is updating");
                 adapter.setNotes(tests);
             }
         });

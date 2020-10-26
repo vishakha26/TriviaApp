@@ -129,7 +129,7 @@ public class TestActivity extends Activity {
     private void updateText() {
 
         if(ansSelected != null)
-            ansSelected = ansSelected + "\n\n" + questionBank.getQuestion(mQuestionNumber) + "\n";
+            ansSelected = ansSelected + "\n\n" + questionBank.getQuestion(mQuestionNumber) + "\n" + "Answers : ";
 
         if(choice1.isChecked())
             ansSelected = ansSelected + " " +choice1.getText().toString() +",";

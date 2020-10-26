@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.Toolbar;
 
 public class MainActivity extends AppCompatActivity {
+    public static final String NAME = "name";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 //intent to next activity
                 Intent i = new Intent(getApplicationContext(), TestActivity.class);
-                i.putExtra("name", name.getText().toString());
+                i.putExtra(NAME, name.getText().toString());
                 startActivity(i);
             }
         });
