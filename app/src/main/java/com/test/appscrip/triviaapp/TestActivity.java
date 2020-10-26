@@ -41,8 +41,9 @@ public class TestActivity extends Activity {
         nextQuestion = (Button) findViewById(R.id.nextquestion);
         summary = (Button) findViewById(R.id.summary);
 
-        if(mQuestionNumber<questionBank.getCount())
+        if(mQuestionNumber<questionBank.getCount()){
             updateQuestion();
+        }
 
         choice1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,6 +73,7 @@ public class TestActivity extends Activity {
             @Override
             public void onClick(View view) {
                 if(mQuestionNumber<questionBank.getCount()) {
+                    mQuestionNumber++;
                     updateQuestion();
                 }
             }
@@ -84,24 +86,26 @@ public class TestActivity extends Activity {
                 startActivity(i);
             }
         });
+
     }
 
     private void updateQuestion() {
+
         mQuestion.setText(questionBank.getQuestion(mQuestionNumber));
         choice1.setText(questionBank.getChoice1(mQuestionNumber));
         choice2.setText(questionBank.getChoice2(mQuestionNumber));
         choice3.setText(questionBank.getChoice3(mQuestionNumber));
         choice4.setText(questionBank.getChoice4(mQuestionNumber));
 
+
         Log.d("QuestionNumber", String.valueOf(mQuestionNumber));
 
-        mQuestionNumber++;
-
-        if(mQuestionNumber>=questionBank.getCount()) {
+        //Show Summary Button at last question
+        if(mQuestionNumber==questionBank.getCount()-1) {
             summary.setVisibility(View.VISIBLE);
             nextQuestion.setVisibility(View.INVISIBLE);
-            mQuestionNumber = questionBank.getCount()-1;
         }
+
     }
 
     @Override
