@@ -15,6 +15,7 @@ public class QuestionAnswer {
         return mQuestions.length;
     }
 
+//Todo select only one in question number one
 
     public String getQuestion(int a) {
         String question = mQuestions[a];

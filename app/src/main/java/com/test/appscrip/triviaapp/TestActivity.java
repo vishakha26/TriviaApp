@@ -20,7 +20,7 @@ public class TestActivity extends Activity {
     CheckBox choice4;
     Button nextQuestion;
     Button summary;
-    private int mQuestionNumber = 0;
+    int mQuestionNumber = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,13 +100,15 @@ public class TestActivity extends Activity {
         if(mQuestionNumber>=questionBank.getCount()) {
             summary.setVisibility(View.VISIBLE);
             nextQuestion.setVisibility(View.INVISIBLE);
+            mQuestionNumber = questionBank.getCount()-1;
         }
     }
 
     @Override
     public void onSaveInstanceState(Bundle outState){
         super.onSaveInstanceState(outState);
-
+        //TODO save question state on rotate
         outState.putInt("IndexKey", mQuestionNumber);
+        Log.d("QuestionNumberstate", String.valueOf(mQuestionNumber));
     }
 }
