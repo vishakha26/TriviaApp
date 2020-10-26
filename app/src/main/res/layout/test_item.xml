@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginEnd="8dp"
+    android:layout_marginStart="8dp"
+    android:layout_marginTop="8dp">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="8dp">
+
+        <TextView
+            android:id="@+id/datetime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="Date - Time"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:layout_alignParentLeft="true" />
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="Name"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@id/datetime"/>
+
+        <TextView
+            android:id="@+id/question1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:text="Question1"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@id/name"/>
+
+        <TextView
+            android:id="@+id/question2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:text="Question2"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@id/question1"/>
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>
