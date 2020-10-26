@@ -7,12 +7,13 @@
     android:layout_marginTop="8dp">
 
     <RelativeLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="8dp">
+        android:padding="8dp"
+        android:background="@color/colorGradientStart">
 
         <TextView
-            android:id="@+id/datetime"
+            android:id="@+id/datetime1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ellipsize="end"
@@ -22,7 +23,7 @@
             android:layout_alignParentLeft="true" />
 
         <TextView
-            android:id="@+id/name"
+            android:id="@+id/name1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ellipsize="end"
@@ -30,7 +31,7 @@
             android:text="Name"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:layout_alignParentLeft="true"
-            android:layout_below="@id/datetime"/>
+            android:layout_below="@id/datetime1"/>
 
         <TextView
             android:id="@+id/question1"
@@ -40,17 +41,7 @@
             android:text="Question1"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:layout_alignParentLeft="true"
-            android:layout_below="@id/name"/>
-
-        <TextView
-            android:id="@+id/question2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ellipsize="end"
-            android:text="Question2"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:layout_alignParentLeft="true"
-            android:layout_below="@id/question1"/>
+            android:layout_below="@id/name1"/>
 
     </RelativeLayout>
 

@@ -2,6 +2,7 @@ package com.test.appscrip.triviaapp;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.room.Database;
@@ -22,6 +23,7 @@ public abstract class TestDatabse extends RoomDatabase {
             instance = Room.databaseBuilder(context.getApplicationContext(),
                     TestDatabse.class,"test_database")
                     .fallbackToDestructiveMigration()
+                    .addCallback(roomCallback)
                     .build();
         }
         return instance;
@@ -41,8 +43,9 @@ public abstract class TestDatabse extends RoomDatabase {
         }
         @Override
         protected Void doInBackground(Void... voids) {
-            testDao.insert(new Test("Ajay" ,"test1", "For testing", "ans1"));
-            testDao.insert(new Test("Vijay", "test2", "For testing 2", "ans2"));
+            testDao.insert(new Test("Ajay" ,"test1", "For testing"));
+            testDao.insert(new Test("Vijay", "test2", "For testing 2"));
+            testDao.insert(new Test("Ajay" ,"test1", "For testing, ans1"));
             return null;
         }
     }

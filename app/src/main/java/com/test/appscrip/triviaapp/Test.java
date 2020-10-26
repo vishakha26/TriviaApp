@@ -12,14 +12,12 @@ public class Test {
     //Other columns
     private String name;
     private String datetime;
-    private String question;
-    private String answers;
+    private String question1;
 
-    public Test(String name, String datetime, String question, String answers) {
+    public Test(String name, String datetime, String question1) {
         this.name = name;
         this.datetime = datetime;
-        this.question = question;
-        this.answers = answers;
+        this.question1 = question1;
     }
 
     public void setId(int id) {
@@ -38,11 +36,8 @@ public class Test {
         return datetime;
     }
 
-    public String getQuestion() {
-        return question;
+    public String getQuestion1() {
+        return question1;
     }
 
-    public String getAnswers() {
-        return answers;
-    }
 }

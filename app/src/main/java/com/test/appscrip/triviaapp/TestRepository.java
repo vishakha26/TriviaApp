@@ -21,6 +21,10 @@ public class TestRepository {
         new InsertNoteAsyncTask(testDao).execute(test);
     }
 
+    public void update(Test test) {
+        new UpdateNoteAsyncTask(testDao).execute(test);
+    }
+
     public LiveData<List<Test>> getAlldata() {
         return alldata;
     }
@@ -28,13 +32,27 @@ public class TestRepository {
     private static class InsertNoteAsyncTask extends AsyncTask<Test, Void, Void> {
         private TestDao testDao;
 
-        //constructor to pass testdao
+        //constructor to pass test dao
         private InsertNoteAsyncTask(TestDao testDao) {
             this.testDao = testDao;
         }
         @Override
         protected Void doInBackground(Test... notes) {
             testDao.insert(notes[0]);
+            return null;
+        }
+    }
+
+    private static class UpdateNoteAsyncTask extends AsyncTask<Test, Void, Void> {
+        private TestDao testDao;
+
+        //constructor to pass testdao
+        private UpdateNoteAsyncTask(TestDao testDao) {
+            this.testDao = testDao;
+        }
+        @Override
+        protected Void doInBackground(Test... notes) {
+            testDao.update(notes[0]);
             return null;
         }
     }
