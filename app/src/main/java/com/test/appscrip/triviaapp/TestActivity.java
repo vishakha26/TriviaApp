@@ -21,6 +21,8 @@ public class TestActivity extends Activity {
     Button nextQuestion;
     Button summary;
     int mQuestionNumber = 0;
+    String name = "NA";
+    private static final String TAG = "TestActivityTag";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +45,12 @@ public class TestActivity extends Activity {
 
         if(mQuestionNumber<questionBank.getCount()){
             updateQuestion();
+        }
+
+        //catch intent
+        if (getIntent().hasExtra("name")) {
+            name = getIntent().getStringExtra("name");
+            Log.d(TAG, name);
         }
 
         choice1.setOnClickListener(new View.OnClickListener() {
@@ -98,7 +106,7 @@ public class TestActivity extends Activity {
         choice4.setText(questionBank.getChoice4(mQuestionNumber));
 
 
-        Log.d("QuestionNumber", String.valueOf(mQuestionNumber));
+        Log.d(TAG, String.valueOf(mQuestionNumber));
 
         //Show Summary Button at last question
         if(mQuestionNumber==questionBank.getCount()-1) {
@@ -112,7 +120,9 @@ public class TestActivity extends Activity {
     public void onSaveInstanceState(Bundle outState){
         super.onSaveInstanceState(outState);
         //TODO save question state on rotate
+
+        // save question index
         outState.putInt("IndexKey", mQuestionNumber);
-        Log.d("QuestionNumberstate", String.valueOf(mQuestionNumber));
+        Log.d(TAG, String.valueOf(mQuestionNumber));
     }
 }
