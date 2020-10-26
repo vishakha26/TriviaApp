@@ -44,7 +44,7 @@ public class SummaryActivity extends AppCompatActivity {
         }
         if (getIntent().hasExtra(NAME)) {
             String name = getIntent().getStringExtra(NAME);
-            finalSummary = "Hello " + name + ": \n" + "Here are the selected answers: " ;
+            finalSummary = "Hello " + name + ": \n" + "Here are the selected answers: " + "\n";
             name1 = "Name : " +name;
         }
 

@@ -8,7 +8,7 @@
                 android:type="linear"
                 android:angle="315"
                 android:startColor="@color/colorGradientEnd"
-                android:centerColor="@color/colorGradientStart"
+                android:centerColor="@color/colorGradientEnd"
                 android:endColor="@color/colorGradientCenter"/>
         </shape>
     </item>
@@ -20,7 +20,7 @@
                 android:angle="315"
                 android:startColor="@color/colorGradientCenter"
                 android:centerColor="@color/colorGradientEnd"
-                android:endColor="@color/colorGradientStart"/>
+                android:endColor="@color/colorGradientEnd"/>
         </shape>
     </item>
 </selector>

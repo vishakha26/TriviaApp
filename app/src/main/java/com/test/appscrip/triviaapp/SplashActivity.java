@@ -26,7 +26,7 @@ public class SplashActivity extends Activity {
                 finish();
             }
         };
-        handler.postDelayed(runnable, 2000);
+        handler.postDelayed(runnable, 1500);
     }
 
     @Override

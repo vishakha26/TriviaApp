@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 //intent to next activity
                 Intent i = new Intent(getApplicationContext(), TestActivity.class);
-                i.putExtra(NAME, name.getText().toString());
+                i.putExtra(NAME, name.getText().toString().trim());
                 startActivity(i);
             }
         });

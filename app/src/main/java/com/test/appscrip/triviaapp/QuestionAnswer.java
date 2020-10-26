@@ -11,6 +11,9 @@ public class QuestionAnswer {
             {"White", "Yellow", "Orange", "Green"}
     };
 
+    // 0 for single choice, 1 for multiple choice answers
+    private int multiOrSingle[] = {0,1};
+
     public int getCount() {
         return mQuestions.length;
     }
@@ -44,4 +47,7 @@ public class QuestionAnswer {
         return choice2;
     }
 
+    public int getMultiOrSingle(int a) {
+        return multiOrSingle[a];
+    }
 }

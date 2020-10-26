@@ -15,6 +15,8 @@ import java.util.Calendar;
 
 public class TestActivity extends Activity {
 
+    public static final String INDEX = "IndexKey";
+    public static final String QUESANS = "Question";
     public static final String NAME = "name";
     public static final String DATETIME = "datetime";
     public static final String QUESTION1 = "question1";
@@ -37,10 +39,13 @@ public class TestActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.test_activity);
 
+        //check if there is any saved state
         if(savedInstanceState!=null) {
-            mQuestionNumber = savedInstanceState.getInt("IndexKey");
+            mQuestionNumber = savedInstanceState.getInt(INDEX);
+            ansSelected = savedInstanceState.getString(QUESANS);
         } else {
             mQuestionNumber = 0;
+            ansSelected = "";
         }
 
         mQuestion = (TextView) findViewById(R.id.question);
@@ -52,7 +57,6 @@ public class TestActivity extends Activity {
         summary = (Button) findViewById(R.id.summary);
 
         if(mQuestionNumber<questionBank.getCount()){
-            updateText();
             updateQuestion();
         }
 
@@ -66,7 +70,37 @@ public class TestActivity extends Activity {
         SimpleDateFormat month_date = new SimpleDateFormat("dd MMMM HH:mm");
         String date = month_date.format(mcurrentDate.getTime());
 
-        ansSelected = "\n";
+        choice1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //check if question has single answer
+                if(questionBank.getMultiOrSingle(mQuestionNumber) == 0)
+                    //uncheck all other boxes
+                    onCheckboxClicked(choice1);
+            }
+        });
+        choice2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(questionBank.getMultiOrSingle(mQuestionNumber) == 0)
+                    onCheckboxClicked(choice2);
+            }
+        });
+        choice3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(questionBank.getMultiOrSingle(mQuestionNumber) == 0)
+                    onCheckboxClicked(choice3);
+            }
+        });
+        choice4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(questionBank.getMultiOrSingle(mQuestionNumber) == 0)
+                    onCheckboxClicked(choice4);
+            }
+        });
+
 
         nextQuestion.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,7 +110,6 @@ public class TestActivity extends Activity {
                     mQuestionNumber++;
                     updateQuestion();
                 }
-//                saveData();
             }
         });
 
@@ -95,16 +128,38 @@ public class TestActivity extends Activity {
 
     }
 
-    private void saveData() {
-        if(ansSelected.isEmpty()) {
-            ansSelected = "Nothing Selected";
+    public void onCheckboxClicked(View view) {
+
+        switch (view.getId()) {
+
+            case R.id.checkBox:
+
+                choice2.setChecked(false);
+                choice3.setChecked(false);
+                choice4.setChecked(false);
+                break;
+
+            case R.id.checkBox2:
+
+                choice1.setChecked(false);
+                choice3.setChecked(false);
+                choice4.setChecked(false);
+                break;
+
+            case R.id.checkBox3:
+
+                choice1.setChecked(false);
+                choice2.setChecked(false);
+                choice4.setChecked(false);
+                break;
+
+            case R.id.checkBox4:
+
+                choice1.setChecked(false);
+                choice2.setChecked(false);
+                choice3.setChecked(false);
+                break;
         }
-        Intent i = new Intent();
-        i.putExtra(NAME, name);
-        i.putExtra(DATETIME, "27 Oct 2020 2:00am");
-        i.putExtra(QUESTION1, questionBank.getQuestion(mQuestionNumber) + "\n" + ansSelected);
-        setResult(RESULT_OK, i);
-        finish();
     }
 
     private void updateQuestion() {
@@ -129,16 +184,30 @@ public class TestActivity extends Activity {
     private void updateText() {
 
         if(ansSelected != null)
-            ansSelected = ansSelected + "\n\n" + questionBank.getQuestion(mQuestionNumber) + "\n" + "Answers : ";
+            ansSelected = ansSelected + "\n" + questionBank.getQuestion(mQuestionNumber) + "\n" ;
 
-        if(choice1.isChecked())
-            ansSelected = ansSelected + " " +choice1.getText().toString() +",";
-        if(choice2.isChecked())
+        if(questionBank.getMultiOrSingle(mQuestionNumber) == 0)
+            ansSelected = ansSelected + "Answer : ";
+        else
+            ansSelected = ansSelected + "Answers : ";
+
+        //uncheck checked box for next question
+        if(choice1.isChecked()) {
+            ansSelected = ansSelected + " " + choice1.getText().toString() + ",";
+            choice1.setChecked(false);
+        }
+        if(choice2.isChecked()) {
             ansSelected = ansSelected + " " +choice2.getText().toString() + ",";
-        if(choice3.isChecked())
+            choice2.setChecked(false);
+        }
+        if(choice3.isChecked()) {
             ansSelected = ansSelected + " " +choice3.getText().toString() + ",";
-        if(choice4.isChecked())
+            choice3.setChecked(false);
+        }
+        if(choice4.isChecked()) {
             ansSelected = ansSelected + " " +choice4.getText().toString() + ",";
+            choice4.setChecked(false);
+        }
 
         //to remove extra comma at the end
         if(ansSelected != null)
@@ -149,10 +218,10 @@ public class TestActivity extends Activity {
     @Override
     public void onSaveInstanceState(Bundle outState){
         super.onSaveInstanceState(outState);
-        //TODO save question state on rotate
 
-        // save question index
-        outState.putInt("IndexKey", mQuestionNumber);
+        // save question index and question answer string
+        outState.putInt(INDEX, mQuestionNumber);
+        outState.putString(QUESANS, ansSelected);
         Log.d(TAG, String.valueOf(mQuestionNumber));
     }
 }

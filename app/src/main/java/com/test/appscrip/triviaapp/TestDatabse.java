@@ -18,6 +18,7 @@ public abstract class TestDatabse extends RoomDatabase {
 
     public abstract TestDao testDao();
 
+    //syncronized to maintain consistency
     public static synchronized TestDatabse getInstance(Context context) {
         if(instance == null) {
             instance = Room.databaseBuilder(context.getApplicationContext(),
@@ -36,6 +37,8 @@ public abstract class TestDatabse extends RoomDatabase {
             new PopulateDbAsyncTask(instance).execute();
         }
     };
+
+    //run db tasks in another thread
     private static class PopulateDbAsyncTask extends AsyncTask<Void, Void, Void> {
         private TestDao testDao;
         private PopulateDbAsyncTask(TestDatabse db) {
